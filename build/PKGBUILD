@@ -1,0 +1,43 @@
+pkgname=wndrecd
+pkgver=2.4.1
+pkgrel=1
+epoch=
+pkgdesc="record kde top window"
+arch=('x86_64')
+url="https://github.com/KEKE046/wndrecd"
+license=('MIT')
+groups=("ammonite-scala")
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("git://github.com/KEKE046/wndrecd")
+noextract=()
+md5sums=('SKIP')
+validpgpkeys=()
+
+pkgver() {
+    echo "1.0.0"
+}
+
+prepare() {
+    cd $srcdir/$pkgname
+    git submodule --init
+}
+
+build() {
+    cd $srcdir/$pkgname
+    cmake -B build -S "wndrecd" -DCMAKE_INSTALL_PREFIX='/usr'
+    cmake --build build
+}
+
+package() {
+    DESTDIR="$pkgdir" cmake --install build
+}

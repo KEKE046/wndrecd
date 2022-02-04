@@ -1,3 +1,5 @@
 .vscode
 wndrecd/build
 note*
+build/*
+!build/PKGBUILD
