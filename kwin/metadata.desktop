@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=record-wnd
+Comment=Record activate window.
+Icon=preferences-system-windows
+
+X-KDE-PluginInfo-Author=Keke
+X-KDE-PluginInfo-Email=KEKE_046@pku.edu.cn
+X-KDE-PluginInfo-Name=record-wnd
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL
+
+Type=Service
+X-KDE-ServiceTypes=KWin/Script
+X-Plasma-API=javascript
+X-Plasma-MainScript=main.js
