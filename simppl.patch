@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 720f334..502b371 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -39,7 +39,7 @@ find_package(Threads REQUIRED)
+ find_package(DBus REQUIRED)
+ find_package(Boost)
+ 
+-add_library(simppl SHARED
++add_library(simppl
+     src/callstate.cpp
+     src/dispatcher.cpp
+     src/error.cpp
