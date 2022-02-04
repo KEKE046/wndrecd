@@ -2,6 +2,7 @@
 Description=Activate Window record
 
 [Service]
+User=%i
 ExecStart=/usr/bin/wndrecd ~/.wndrecd.txt
 
 [Install]
