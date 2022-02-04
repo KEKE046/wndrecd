@@ -1,3 +1,3 @@
-[submodule "daemon/simppl"]
-	path = daemon/simppl
+[submodule "wndrecd/simppl"]
+	path = wndrecd/simppl
 	url = https://github.com/martinhaefner/simppl.git
