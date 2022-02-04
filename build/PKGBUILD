@@ -46,6 +46,6 @@ package() {
     mkdir -p $pkgdir/etc/systemd/system/
     cp -r $srcdir/$pkgname/kwin $pkgdir/usr/share/kwin/scripts/wndrecd
     chmod -R 755 $pkgdir/usr/share/kwin/scripts/wndrecd
-    install wndrecd@.service $pkgdir/etc/systemd/system/wndrecd@.service
+    install wndrecd.service $pkgdir/etc/systemd/system/wndrecd.service
     DESTDIR="$pkgdir" cmake --install build
 }

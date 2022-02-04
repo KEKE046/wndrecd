@@ -64,17 +64,20 @@ std::string createMessage(std::string msg) {
 }
 
 std::ofstream fout;
+bool is_open = false;
 
 void log(std::string msg) {
     msg = createMessage(msg);
     std::cout << msg << std::endl;
-    if(fout.is_open()) {
+    if(is_open) {
         fout << msg << std::endl << std::flush;
     }
 }
 
 int main(int argc, char **argv) {
     if(argc > 1) {
+        std::cerr << "open log file: " << argv[1] << std::endl;
+        is_open = true;
         fout.open(argv[1], std::ios_base::app);
     }
     simppl::dbus::enable_threads();
@@ -83,7 +86,7 @@ int main(int argc, char **argv) {
     simppl::dbus::Skeleton<wrecd::Daemon> skel(d, "Daemon");
     simppl::dbus::Stub<org::freedesktop::ScreenSaver> listener(d, "org.freedesktop.ScreenSaver", "wrecd.Daemon.Daemon");
     listener.connected = [&listener](simppl::dbus::ConnectionState st) {
-        std::cout << "register listener" << std::endl;
+        std::cerr << "register listener" << std::endl;
         listener.ActiveChanged.attach() >> [](bool active) {
             if(active) {
                 log("scrlock, scrlock");

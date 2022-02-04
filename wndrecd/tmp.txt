@@ -1,0 +1,4 @@
+2022-02-05 00:43:29.662, activate, main.cpp - wndrecd - Visual Studio Code
+2022-02-05 00:43:29.662, activate, main.cpp - wndrecd - Visual Studio Code
+2022-02-05 00:43:30.096, activate, wndrecd@.service - record-wnd - Visual Studio Code
+2022-02-05 00:43:30.096, activate, wndrecd@.service - record-wnd - Visual Studio Code
