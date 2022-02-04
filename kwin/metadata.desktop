@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=record-wnd
+Name=wndrecd
 Comment=Record activate window.
 Icon=preferences-system-windows
 
 X-KDE-PluginInfo-Author=Keke
 X-KDE-PluginInfo-Email=KEKE_046@pku.edu.cn
-X-KDE-PluginInfo-Name=record-wnd
+X-KDE-PluginInfo-Name=wndrecd
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=GPL
 

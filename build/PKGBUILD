@@ -29,7 +29,7 @@ pkgver() {
 
 prepare() {
     cd $srcdir/$pkgname
-    git submodule init
+    git submodule update --init
 }
 
 build() {
@@ -39,5 +39,8 @@ build() {
 }
 
 package() {
+    cd $srcdir/$pkgname
+    install -d kwin $pkgdir/usr/share/kwin/scripts/wndrecd
+    kpackagetool5 --type=KWin/Script -i kwin --global
     DESTDIR="$pkgdir" cmake --install build
 }
