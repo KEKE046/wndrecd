@@ -40,7 +40,10 @@ build() {
 
 package() {
     cd $srcdir/$pkgname
-    install -d kwin $pkgdir/usr/share/kwin/scripts/wndrecd
-    kpackagetool5 --type=KWin/Script -i kwin --global
+    mkdir -p $pkgdir/usr/share/kwin/scripts/
+    mkdir -p $pkgdir/etc/systemd/system/
+    cp -r $srcdir/$pkgname/kwin $pkgdir/usr/share/kwin/scripts/wndrecd
+    chmod -R 755 $pkgdir/usr/share/kwin/scripts/wndrecd
+    install wndrecd.service $pkgdir/etc/systemd/system/wndrecd.service
     DESTDIR="$pkgdir" cmake --install build
 }
