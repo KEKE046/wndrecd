@@ -5,12 +5,12 @@ epoch=
 pkgdesc="record kde top window"
 arch=('x86_64')
 url="https://github.com/KEKE046/wndrecd"
-license=('MIT')
-groups=("ammonite-scala")
+license=('Apache2.0')
+groups=()
 depends=()
-makedepends=()
+makedepends=('cmake' 'git')
 checkdepends=()
-optdepends=()
+optdepends=('python-matplotlib' 'python-pandas')
 provides=()
 conflicts=()
 replaces=()
@@ -24,7 +24,8 @@ md5sums=('SKIP')
 validpgpkeys=()
 
 pkgver() {
-    echo "1.0.0"
+    cd "$pkgname"
+    git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
@@ -44,5 +45,7 @@ package() {
     cd $srcdir/$pkgname
     DESTDIR="$pkgdir" cmake --install build
     install -d $pkgdir/usr/lib/systemd/user
+    install -d $pkgdir/usr/bin
     install wndrecd@.service $pkgdir/usr/lib/systemd/user/wndrecd@.service
+    install wndrec $pkgdir/usr/bin/wndrec
 }
