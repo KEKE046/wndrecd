@@ -1,4 +1,5 @@
 .vscode
+build
 note*
 pkgbuild/*
 !pkgbuild/PKGBUILD
