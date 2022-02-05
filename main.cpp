@@ -4,6 +4,8 @@
 #include <simppl/string.h>
 #include <simppl/stub.h>
 
+#include <signal.h>
+
 #include <chrono>
 #include <ctime>  // localtime
 #include <fstream>
@@ -105,6 +107,8 @@ std::string emitScript() {
     return name;
 }
 
+Dispatcher * disp;
+
 int main(int argc, char **argv) {
     enable_threads();
 
@@ -115,6 +119,9 @@ int main(int argc, char **argv) {
     }
 
     Dispatcher d("bus:session");
+    disp = &d;
+    
+    signal(SIGTERM, [](int signal){disp->stop();});
 
     Stub<org::freedesktop::ScreenSaver> listener(d, "org.freedesktop.ScreenSaver", "/org/freedesktop/ScreenSaver");
     listener.connected = [&listener](ConnectionState st) {
@@ -159,6 +166,6 @@ int main(int argc, char **argv) {
     };
 
     d.run();
-    std::cerr << "finish" << std::endl;
+    log("stopped, stopped");
     return 0;
 }
