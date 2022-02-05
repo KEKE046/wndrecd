@@ -35,37 +35,45 @@ for k, v in win_df.iterrows():
     ptr['__dur__'] = v['dur']
 S = 2 * math.pi
 idx = 0
-def strline(s):
-    return '\n'.join([s[i: i + 10] for i in range(0, len(s), 10)])
-def strfdelta(tdelta, fmt):
+def strfdelta(tdelta):
     d = {"days": tdelta.days}
     d["hours"], rem = divmod(tdelta.seconds, 3600)
     d["minutes"], d["seconds"] = divmod(rem, 60)
-    return fmt.format(**d)
-
+    return '{hours}:{minutes}:{seconds}'.format(**d)
+def strf(name, dur, d, p, n=15):
+    sp = [name[i: i + n] for i in range(0, len(name), n)]
+    dur = strfdelta(dur)
+    L = int(d * p * 40)
+    if L <= 1:
+        return sp[0] + ': ' + dur
+    else:
+        return '\n'.join(sp[:max(L - 1, 1)] + [dur])
 def visit(p, acc=0, d=0):
     global idx
     idx += 1
     pct, dur = None, None
     if '__pct__' in p:
         pct, dur = p['__pct__'], p['__dur__']
-    for k, v in p.items():
+    for i, (k, v) in enumerate(p.items()):
+        if i == 3: continue
         if k.startswith('__'):
             continue
         vpct, vdur = visit(v, acc + (pct or 0), d+1)
         pct = vpct if pct is None else pct + vpct
         dur = vdur if dur is None else dur + vdur
-    if d > 0 and pct > 0.01:
+    if d > 0 and pct > 0.005:
         mid = (acc + pct / 2)
         plt.barh([d], [S * pct], [1], left=S * acc)
         rot = mid * 360
         if rot > 90 and rot < 270:
             rot = rot - 180
-        annot = strline(p['__name__'][:30]) + '\n' + strfdelta(dur, '{hours}:{minutes}:{seconds}')
+        annot = strf(p['__name__'], dur, d, pct)
         plt.annotate(annot, (S * mid, d), ha='center', va='center', rotation=rot)
     return pct, dur
 
 fig, ax = plt.subplots(subplot_kw=dict(projection="polar"), figsize=(10, 10))
-visit(tree)
+pct, dur = visit(tree)
+plt.annotate('Total\n' + strfdelta(dur), (0, 0), ha='center', va='center')
 ax.set_axis_off()
+plt.tight_layout()
 plt.show()
