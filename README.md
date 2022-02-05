@@ -40,4 +40,13 @@ $ cat ~/.wndrecd.txt # the record is saved into wndrecd.txt
 $ python analyze.py # you may need to `pip install pandas and matplotlib`
 ```
 
+Also, a command helper `wndrec` is provided:
+```bash
+$ wndrec # show the picture
+$ wndrec clean # clean the log file
+$ wndrec enable # alias to systemctl --user enable ...
+$ wndrec start 
+$ wndrec disable
+```
+
 ![](analysis.jpeg)
