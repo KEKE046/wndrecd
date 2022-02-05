@@ -13,6 +13,7 @@ df.time = pd.to_datetime(df.time)
 df_tmp = df.iloc[:-1].copy()
 df_tmp['duration'] = df.time.diff().iloc[1:].to_numpy()
 df = df_tmp; del df_tmp
+df = df.loc[df.action != ' stopped']
 
 def extract_ent(name):
     global mx_level
