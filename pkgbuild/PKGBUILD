@@ -1,4 +1,5 @@
 pkgname=wndrecd
+pkgver=1.0.0
 pkgrel=1
 epoch=
 pkgdesc="record kde top window"
