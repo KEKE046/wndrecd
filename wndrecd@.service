@@ -3,7 +3,6 @@ Description=Activate Window Recorder
 After=dbus.service
 
 [Service]
-User=%i
 ExecStart=/usr/bin/wndrecd /home/%i/.wndrecd.txt
 
 [Install]
