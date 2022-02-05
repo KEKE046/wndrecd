@@ -77,10 +77,22 @@ void log(std::string msg) {
     }
 }
 
-std::string scriptcode = "callDBus('wndrecd.WndRecd', '/WndRecd', 'wndrecd.WndRecd', 'scriptOnline');\n\
+std::string scriptcode = "\n\
+callDBus('wndrecd.WndRecd', '/WndRecd', 'wndrecd.WndRecd', 'scriptOnline');\n\
+var nonce = 0;\n\
 function actived(client){\n\
     if(client && client.caption) {\n\
         callDBus('wndrecd.WndRecd', '/WndRecd', 'wndrecd.WndRecd', 'submit', client.caption);\n\
+        nonce += 1;\n\
+        const savedNonce = nonce;\n\
+        function captionChanged() {\n\
+            if(nonce != savedNonce) {\n\
+                client.captionChanged.disconnect(captionChanged);\n\
+                return;\n\
+            }\n\
+            callDBus('wndrecd.WndRecd', '/WndRecd', 'wndrecd.WndRecd', 'submit', client.caption);\n\
+        }\n\
+        client.captionChanged.connect(captionChanged);\n\
     }\n\
 }\n\
 workspace.clientActivated.connect(actived);";
