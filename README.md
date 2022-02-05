@@ -37,4 +37,7 @@ you can also start the service:
 ```bash
 $ systemctl --user enable wndrecd@keke.service # replace `keke` to your user name
 $ cat ~/.wndrecd.txt # the record is saved into wndrecd.txt
+$ python analyze.py # you may need to `pip install pandas and matplotlib`
 ```
+
+![](analysis.jpeg)
