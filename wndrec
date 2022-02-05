@@ -1,3 +1,11 @@
+#!/bin/bash
+
+if [[ $1 != '' ]]; then
+    systemctl --user $1 wndrecd@`whoami`
+    exit $?
+fi
+
+python - $@ <<EOF
 import re
 import math
 import pandas as pd
@@ -81,3 +89,4 @@ plt.annotate('Total\n' + strfdelta(dur), (0, 0), ha='center', va='center')
 ax.set_axis_off()
 plt.tight_layout()
 plt.show()
+EOF
