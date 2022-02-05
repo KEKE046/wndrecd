@@ -24,8 +24,7 @@ md5sums=('SKIP')
 validpgpkeys=()
 
 pkgver() {
-    cd "$pkgname"
-    git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+    echo $pkgver
 }
 
 prepare() {
