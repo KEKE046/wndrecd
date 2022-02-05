@@ -1,8 +1,0 @@
-[Unit]
-Description=Activate Window record
-
-[Service]
-ExecStart=/usr/bin/wndrecd /home/%i/.wndrecd.txt
-
-[Install]
-WantedBy=multi-user.target

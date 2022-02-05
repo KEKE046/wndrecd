@@ -30,22 +30,19 @@ pkgver() {
 prepare() {
     cd $srcdir/$pkgname
     git submodule update --init
-    cd wndrecd/simppl
+    cd simppl
     git apply $srcdir/$pkgname/simppl.patch
 }
 
 build() {
     cd $srcdir/$pkgname
-    cmake -B build -S "wndrecd" -DCMAKE_INSTALL_PREFIX='/usr'
+    cmake -B build -S . -DCMAKE_INSTALL_PREFIX='/usr'
     cmake --build build
 }
 
 package() {
     cd $srcdir/$pkgname
-    mkdir -p $pkgdir/usr/share/kwin/scripts/
-    mkdir -p $pkgdir/etc/systemd/system/
-    cp -r $srcdir/$pkgname/kwin $pkgdir/usr/share/kwin/scripts/wndrecd
-    chmod -R 755 $pkgdir/usr/share/kwin/scripts/wndrecd
-    install wndrecd.service $pkgdir/etc/systemd/system/wndrecd.service
     DESTDIR="$pkgdir" cmake --install build
+    install -d $pkgdir/usr/lib/systemd/user
+    install wndrecd@.service $pkgdir/usr/lib/systemd/user/wndrecd@.service
 }
