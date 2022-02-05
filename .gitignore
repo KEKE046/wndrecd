@@ -1,5 +1,4 @@
 .vscode
-wndrecd/build
 note*
-build/*
-!build/PKGBUILD
+pkgbuild/*
+!pkgbuild/PKGBUILD
