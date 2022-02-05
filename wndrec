@@ -1,18 +1,21 @@
 #!/bin/bash
 
-if [[ $1 == 'clean' ]]; then
-    echo > ~/.wndrecd.txt
-fi
-
-if [[ $1 != '' ]]; then
-    systemctl --user $1 wndrecd@`whoami`
-    exit $?
-fi
+case $1 in  
+    start|stop|status|restart|enable|disable)  
+        systemctl --user $1 wndrecd@`whoami`  
+        exit $?
+        ;;
+    clean)
+        echo > ~/.wndrecd.txt
+        exit $?
+        ;;
+esac
 
 python - $@ <<EOF
 import re
 import math
 import pandas as pd
+import sys
 import matplotlib.pyplot as plt
 
 MAX_DEPTH = 4
@@ -20,6 +23,16 @@ MIN_PERCENT = 0.5
 
 df = pd.read_csv('~/.wndrecd.txt', index_col=False, delimiter=',', names=['time', 'action', 'win'])
 df = df.loc[df.action != ' scrunlock']
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'today':
+        day = df.time.iloc[-1].split(' ')[0]
+    else:
+        day = sys.argv[1]
+    mask = df.time.apply(lambda s: day in s)
+    if not mask.any():
+        print('no record found')
+        exit(1)
+    df = df.loc[mask]
 df.time = pd.to_datetime(df.time)
 
 df_tmp = df.iloc[:-1].copy()

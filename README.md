@@ -40,9 +40,12 @@ $ cat ~/.wndrecd.txt # the record is saved into wndrecd.txt
 $ python analyze.py # you may need to `pip install pandas and matplotlib`
 ```
 
-Also, a command helper `wndrec` is provided:
+Also, a command helper `wndrec` is provided, you can copy it to your `/usr/local/bin`.
+
 ```bash
 $ wndrec # show the picture
+$ wndrec today # show today
+$ wndrec 2022-02-04 # show 2022-02-04
 $ wndrec clean # clean the log file
 $ wndrec enable # alias to systemctl --user enable ...
 $ wndrec start 
