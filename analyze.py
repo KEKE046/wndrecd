@@ -13,7 +13,7 @@ def read_data(ltime=None, rtime=None, file='~/.wndrecd.txt'):
                      dtype={'action': 'category', 'win': str},
                      parse_dates=['time'])
     df = df.loc[ltime:rtime].copy()
-    df = df.loc[df.action != ' scrunlock']
+    df = df.loc[(df.action != ' scrunlock')&(df.action != ' stopped')]
     df_tmp = df.iloc[:-1].copy()
     df_tmp['duration'] = pd.Series(df.index).diff().iloc[1:].to_numpy()
     df = df_tmp; del df_tmp
