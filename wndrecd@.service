@@ -1,9 +1,12 @@
 [Unit]
 Description=Activate Window Recorder
-After=dbus.service
+Requires=dbus.service
+
 
 [Service]
 ExecStart=/usr/bin/wndrecd /home/%i/.wndrecd.txt
+Restart=on-failure
+RestartSec=10s
 
 [Install]
 WantedBy=default.target
