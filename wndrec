@@ -5,6 +5,10 @@ case $1 in
         systemctl --user $1 wndrecd@`whoami`  
         exit $?
         ;;
+    edit)
+        systemctl --user $1 --full --force wndrecd@
+        exit $?
+        ;;
     clean)
         echo > ~/.wndrecd.txt
         exit $?
