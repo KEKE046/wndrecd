@@ -1,5 +1,5 @@
 pkgname=wndrecd-git
-pkgver=v1.0.0
+pkgver=v1.1.0.r1.g580b7d7
 pkgrel=1
 epoch=
 pkgdesc="record kde top window"
@@ -28,23 +28,23 @@ pkgver() {
 }
 
 prepare() {
-    cd $srcdir/$pkgname
+    cd "$srcdir/wndrecd"
     git submodule update --init
     cd simppl
-    git apply $srcdir/$pkgname/simppl.patch
+    git apply "$srcdir/wndrecd/simppl.patch"
 }
 
 build() {
-    cd $srcdir/$pkgname
+    cd "$srcdir/wndrecd"
     cmake -B build -S . -Wno-dev -DCMAKE_INSTALL_PREFIX='/usr' -DCMAKE_BUILD_TYPE='Release'
     cmake --build build
 }
 
 package() {
-    cd $srcdir/$pkgname
+    cd "$srcdir/wndrecd"
     DESTDIR="$pkgdir" cmake --install build
-    install -d $pkgdir/usr/lib/systemd/user
-    install -d $pkgdir/usr/bin
-    install wndrecd@.service $pkgdir/usr/lib/systemd/user/wndrecd@.service
-    install wndrec $pkgdir/usr/bin/wndrec
+    install -d "$pkgdir/usr/lib/systemd/user"
+    install -d "$pkgdir/usr/bin"
+    install wndrecd@.service "$pkgdir/usr/lib/systemd/user/wndrecd@.service"
+    install wndrec "$pkgdir/usr/bin/wndrec"
 }
