@@ -1,5 +1,5 @@
-pkgname=wndrecd
-pkgver=1.0.0
+pkgname=wndrecd-git
+pkgver=v1.0.0
 pkgrel=1
 epoch=
 pkgdesc="record kde top window"
@@ -24,7 +24,7 @@ md5sums=('SKIP')
 validpgpkeys=()
 
 pkgver() {
-    echo $pkgver
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
