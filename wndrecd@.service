@@ -4,7 +4,7 @@ Requires=dbus.service
 
 
 [Service]
-ExecStartPre=/bin/bash -c "DAY=$(tail -n1 $HOME/.wndrecd.txt | cut -d, -f1); [[ $DAY == \"\" ]] || echo \"$DAY, stopped, stoped\" >> $HOME/.wndrecd.txt"
+ExecStartPre=/bin/bash -c "DAY=$(tail -n1 $HOME/.wndrecd.txt | cut -d, -f1); [[ $DAY == \"\" ]] || echo \"$DAY, stoped\" >> $HOME/.wndrecd.txt"
 ExecStart=/usr/bin/wndrecd /home/%i/.wndrecd.txt
 Restart=on-failure
 RestartSec=10s
