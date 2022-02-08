@@ -66,6 +66,10 @@ if 'nolock' in args:
     df = df.loc[df.win != ' scrlock']
 df = df.loc[df.win != ' stopped']
 
+if len(df) == 0:
+    print("no record")
+    exit(0)
+
 def aggrate_win(data):
     split_pat = re.compile('\s+[—-]\s+')
     label = df.win.apply(lambda n: tuple(split_pat.split(n.strip(' ')))[::-1])
