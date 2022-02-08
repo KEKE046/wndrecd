@@ -57,7 +57,8 @@ if day:
         rtime = ltime + oneday
     else:
         rtime = datetime.date.fromisoformat(day[-1]) + oneday
-
+reg_pat = re.compile(r'[+-].*')
+reg = tuple(filter(reg_pat.fullmatch, args))
 
 df = read_data(ltime, rtime)
 
@@ -65,6 +66,12 @@ df = read_data(ltime, rtime)
 if 'nolock' in args:
     df = df.loc[df.win != ' scrlock']
 df = df.loc[df.win != ' stopped']
+for pat in reg:
+    tp, pat = pat[0], pat[1:]
+    mask = df.win.str.contains(pat)
+    if tp == '-':
+        mask = ~mask
+    df = df.loc[mask].copy(); del mask
 
 if len(df) == 0:
     print("no record")

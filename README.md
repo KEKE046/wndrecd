@@ -4,6 +4,8 @@
 
 Recording the windows title you activate each time in KDE, to help you analyzing your time comsumption.
 
+![](analysis.jpeg)
+
 ## install
 
 Download `pkgbuild/PKGBUILD` file, then `makepkg -si`.
@@ -54,4 +56,11 @@ $ wndrec start
 $ wndrec disable
 ```
 
-![](analysis.jpeg)
+A filter grammar is supported:
+
+```
+$ wndrec +Konsole # show only Konsole
+$ wndrec -Firefox # remove firefox
+$ wndrec "+Konsole$" # regular expression is supported
+$ wndrec +Konsole -Firefox # add Konsole, then remove Firefox
+```
