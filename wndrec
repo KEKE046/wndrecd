@@ -29,11 +29,11 @@ min_percent = 0.5
 
 def read_data(ltime=None, rtime=None, file='~/.wndrecd.txt'):
     df = pd.read_csv(file, index_col='time', delimiter=',',
-                     names=['time', 'action', 'win'], 
-                     dtype={'action': 'category', 'win': str},
+                     names=['time', 'win'], 
+                     dtype={'win': str},
                      parse_dates=['time'])
     df = df.loc[ltime:rtime].copy()
-    df = df.loc[(df.action != ' scrunlock')&(df.action != ' stopped')]
+    df = df.loc[df.win != ' scrunlock']
     df_tmp = df.iloc[:-1].copy()
     df_tmp['duration'] = pd.Series(df.index).diff().iloc[1:].to_numpy()
     df = df_tmp; del df_tmp
@@ -63,7 +63,8 @@ df = read_data(ltime, rtime)
 
 
 if 'nolock' in args:
-    df = df.loc[df.action != ' scrlock']
+    df = df.loc[df.win != ' scrlock']
+df = df.loc[df.win != ' stopped']
 
 def aggrate_win(data):
     split_pat = re.compile('\s+[—-]\s+')

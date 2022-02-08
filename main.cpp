@@ -128,16 +128,16 @@ int main(int argc, char **argv) {
         std::cerr << "register listener" << std::endl;
         listener.ActiveChanged.attach() >> [](bool active) {
             if (active) {
-                log("scrlock, scrlock");
+                log("scrlock");
             } else {
-                log("scrunlock, scrunlock");
+                log("scrunlock");
             }
         };
     };
 
     std::cerr << "start receiver" << std::endl;
     Skeleton<wndrecd::WndRecd> skel(d, "wndrecd.WndRecd", "/WndRecd");
-    skel.submit >> [&](const std::string &title) {log("activate, " + title);};
+    skel.submit >> [&](const std::string &title) {log(title);};
     skel.scriptOnline >> [&](){std::cerr << "script online" << std::endl;};
 
     auto scriptfile = emitScript();
@@ -166,6 +166,6 @@ int main(int argc, char **argv) {
     };
 
     d.run();
-    log("stopped, stopped");
+    log("stopped");
     return 0;
 }
