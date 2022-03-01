@@ -65,7 +65,7 @@ df = read_data(ltime, rtime)
 
 if 'nolock' in args:
     df = df.loc[df.win != ' scrlock']
-# df = df.loc[df.win != ' stopped']
+    df = df.loc[df.win != ' stopped']
 for pat in reg:
     tp, pat = pat[0], pat[1:]
     mask = df.win.str.contains(pat)

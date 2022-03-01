@@ -1,5 +1,5 @@
 pkgname=wndrecd-git
-pkgver=v1.1.0.r1.g580b7d7
+pkgver=v1.1.0.r4.g17a3be5
 pkgrel=1
 epoch=
 pkgdesc="record kde top window"
