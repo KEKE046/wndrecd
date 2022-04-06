@@ -1,5 +1,5 @@
 pkgname=wndrecd-git
-pkgver=v1.1.0.r4.g17a3be5
+pkgver=v1.1.0.r5.g5e3505c
 pkgrel=1
 epoch=
 pkgdesc="record kde top window"
@@ -18,7 +18,7 @@ backup=()
 options=()
 install=
 changelog=
-source=("git://github.com/KEKE046/wndrecd")
+source=("git+https://github.com/KEKE046/wndrecd")
 noextract=()
 md5sums=('SKIP')
 validpgpkeys=()

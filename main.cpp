@@ -64,6 +64,7 @@ std::string getTimeStamp() {
 
 std::string createMessage(std::string msg) {
     std::stringstream ss;
+    for(auto & c: msg) c = c == ',' ? '.' : c;
     ss << getTimeStamp() << ", " << msg;
     return ss.str();
 }
